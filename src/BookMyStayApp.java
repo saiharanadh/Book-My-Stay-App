@@ -1,4 +1,5 @@
 abstract class Room {
+
     protected int numberofbeds;
     protected int squarefeet;
     protected double pricepernight;
@@ -33,7 +34,6 @@ class SuiteRoom extends Room {
         super(3, 750, 5000.0);
     }
 }
-
 public class BookMyStayApp {
     public static void main(String[] args) {
 

@@ -18,23 +18,23 @@ abstract class Room {
     }
 
 }
-    class SingleRoom extends Room {
-        public SingleRoom() {
-            super(1, 250, 1500.0);
-        }
+class SingleRoom extends Room {
+    public SingleRoom() {
+        super(1, 250, 1500.0);
     }
+}
 
-    class DoubleRoom extends Room {
-        public DoubleRoom() {
-            super(2, 400, 2500.0);
-        }
+class DoubleRoom extends Room {
+    public DoubleRoom() {
+        super(2, 400, 2500.0);
     }
+}
 
-    class SuiteRoom extends Room {
-        public SuiteRoom() {
-            super(3, 750, 5000.0);
-        }
+class SuiteRoom extends Room {
+    public SuiteRoom() {
+        super(3, 750, 5000.0);
     }
+}
 
 class RoomInventory {
     int RoomsAvailable;
@@ -61,27 +61,43 @@ class RoomInventory {
         roomAvailability.put(roomType, count);
     }
 }
-public class BookMyStayApp{
-    public static void main(String [] args){
-        Room single= new SingleRoom();
-        Room doubl= new DoubleRoom();
-        Room suite = new SuiteRoom();
+
+class RoomSearchService {
+    public void searchAvailableRooms(RoomInventory inventory, Room SingleRoom, Room DoubleRoom, Room SuiteRoom) {
+
+        System.out.println("RoomSearch");
+        System.out.println();
+        if (inventory.getRoomAvailability().get("Single:") > 0) {
+            System.out.println("\nSingle Room:");
+            SingleRoom.displayroomdetails();
+            System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Single:"));
+        }
+        System.out.println();
+        if (inventory.getRoomAvailability().get("Double:") > 0) {
+            System.out.println("\nDouble Room:");
+            DoubleRoom.displayroomdetails();
+            System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Double:"));
+        }
+        System.out.println();
+        if (inventory.getRoomAvailability().get("Suite:") > 0) {
+            System.out.println("\nSuite Room:");
+            SuiteRoom.displayroomdetails();
+            System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Suite:"));
+        }
+    }
+}
+
+public class BookMyStayApp {
+    public static void main(String[] args) {
+
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
+
         RoomInventory inventory = new RoomInventory();
-        System.out.println("Hotel Room Inventory Status");
 
-        System.out.println();
-        System.out.println("Single:");
-        single.displayroomdetails();
-        System.out.println("Available:"+inventory.getRoomAvailability().get("Single:"));
+        RoomSearchService service = new RoomSearchService();
 
-        System.out.println();
-        System.out.println("Double:");
-        doubl.displayroomdetails();
-        System.out.println("Available:"+inventory.getRoomAvailability().get("Double:"));
-
-        System.out.println();
-        System.out.println("Suite:");
-        suite.displayroomdetails();
-        System.out.println("Available:"+inventory.getRoomAvailability().get("Suite:"));
+        service.searchAvailableRooms(inventory, singleRoom, doubleRoom, suiteRoom);
     }
 }
